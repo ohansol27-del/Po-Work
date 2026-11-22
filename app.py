@@ -249,7 +249,7 @@ if 'page' not in st.session_state: st.session_state['page'] = 'home'
 if 'selected_job_id' not in st.session_state: st.session_state['selected_job_id'] = None
 if 'student_verified' not in st.session_state: st.session_state['student_verified'] = False
 if 'student_profile' not in st.session_state:
-    st.session_state['student_profile'] = {"name": "오한솔", "school": "강원대학교", "student_id": "202423696"}
+    st.session_state['student_profile'] = {"name": "", "school": "", "student_id": ""}
 if 'redirect_after_student_login' not in st.session_state: st.session_state['redirect_after_student_login'] = 'student_list'
 if 'current_page' not in st.session_state: st.session_state['current_page'] = 1
 if 'filter_type' not in st.session_state: st.session_state['filter_type'] = "전체보기"
@@ -562,7 +562,8 @@ elif st.session_state['page'] == 'ugly_market':
 elif st.session_state['page'] == 'my_page':
     st.markdown("<h1 style='font-family: \"Jua\", sans-serif;'>📋 내 활동 (신청 · 예약 내역)</h1>", unsafe_allow_html=True)
     prof = st.session_state['student_profile']
-    st.info(f"👤 인증 사용자: **{prof['name']}** ({prof['school']} · 학번 {prof['student_id']})")
+    display_name = prof['name'] if prof['name'] else "학생 인증 사용자"
+    st.info(f"👤 인증 사용자: **{display_name}** ({prof['school']} · 학번 {prof['student_id']})")
 
     c_left, c_right = st.columns(2)
     with c_left:
@@ -641,9 +642,9 @@ elif st.session_state['page'] == 'student_login':
 
         with st.form("student_login_form"):
             st.write("안전한 매칭을 위해 대학교 학생 인증을 진행합니다.")
-            in_name = st.text_input("이름", value=st.session_state['student_profile']['name'])
-            in_school = st.text_input("학교명", value=st.session_state['student_profile']['school'])
-            in_sid = st.text_input("학번", value=st.session_state['student_profile']['student_id'])
+            in_name = st.text_input("이름", value=st.session_state['student_profile']['name'], placeholder="예: 홍길동")
+            in_school = st.text_input("학교명", value=st.session_state['student_profile']['school'], placeholder="예: 강원대학교")
+            in_sid = st.text_input("학번", value=st.session_state['student_profile']['student_id'], placeholder="예: 202600000")
             st.text_input("휴대전화 번호", placeholder="예: 010-1234-5678")
             if st.form_submit_button("학교 인증하고 계속하기", use_container_width=True):
                 st.session_state['student_verified'] = True
