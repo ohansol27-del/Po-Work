@@ -102,8 +102,9 @@ css = (
     "<style>"
     "@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;600;700&display=swap');"
     ".stApp, [data-testid='stAppViewContainer'] { background-color: " + app_bg + " !important; font-family: 'Noto Sans KR', sans-serif; }"
-    "[data-testid='stHeader'] { background: transparent !important; height: 1.2rem !important; }"
-    ".block-container { max-width: 97% !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; padding-top: 1.1rem !important; padding-bottom: 3rem !important; }"
+    "[data-testid='stHeader'] { background: transparent !important; height: 0px !important; min-height: 0px !important; pointer-events: none !important; z-index: 1 !important; }"
+    "[data-testid='stToolbar'] { pointer-events: none !important; }"
+    ".block-container { max-width: 97% !important; padding-left: 1.5rem !important; padding-right: 1.5rem !important; padding-top: 1.4rem !important; padding-bottom: 3rem !important; position: relative; z-index: 10; }"
     ".stApp p, .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp label, [data-testid='stMarkdownContainer'] p { color: " + text_main + " !important; }"
     ".brand-logo { font-family: 'Jua', sans-serif !important; font-size: 26px !important; color: " + primary_green + " !important; letter-spacing: -0.5px; }"
     ".brand-sub { font-size: 12px !important; color: " + text_sub + " !important; margin-left: 6px; }"
@@ -152,18 +153,23 @@ css = (
     ".blue-notice { color: " + blue_text + " !important; font-size: 14px; text-align: center; margin-top: 8px; font-weight: bold; }"
     ".ticket-box { background-color: " + card_bg + "; border: 2px solid " + primary_green + "; border-radius: 0px; padding: 20px; margin-top: 14px; border-left: 16px solid " + primary_green + "; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); }"
     ".ticket-box * { color: " + text_main + " !important; }"
-    "button[kind='secondary'], button[kind='primary'], .stButton > button, .stFormSubmitButton > button { background-color: " + btn_bg + " !important; color: " + btn_text + " !important; border: 1.5px solid " + border_subtle + " !important; border-radius: 0px !important; }"
-    "button[kind='secondary'] *, button[kind='primary'] *, .stButton > button *, .stFormSubmitButton > button * { color: " + btn_text + " !important; }"
+
+    /* 버튼 전체 클릭 영역 확보 (자식 요소가 클릭을 가로채지 않도록 pointer-events: none 적용) */
+    ".stButton, .stFormSubmitButton { position: relative; z-index: 50; }"
+    "button[kind='secondary'], button[kind='primary'], .stButton > button, .stFormSubmitButton > button { background-color: " + btn_bg + " !important; color: " + btn_text + " !important; border: 1.5px solid " + border_subtle + " !important; border-radius: 0px !important; min-height: 44px !important; padding: 8px 14px !important; cursor: pointer !important; position: relative; z-index: 50; }"
+    "button[kind='secondary'] *, button[kind='primary'] *, .stButton > button *, .stFormSubmitButton > button * { color: " + btn_text + " !important; pointer-events: none !important; }"
     "button[kind='secondary']:hover, button[kind='primary']:hover, .stButton > button:hover, .stFormSubmitButton > button:hover { background-color: " + btn_hover_bg + " !important; color: " + btn_hover_text + " !important; border-color: " + primary_green + " !important; }"
-    "button[kind='secondary']:hover *, button[kind='primary']:hover *, .stButton > button:hover *, .stFormSubmitButton > button:hover * { color: " + btn_hover_text + " !important; }"
+    "button[kind='secondary']:hover *, button[kind='primary']:hover *, .stButton > button:hover *, .stFormSubmitButton > button:hover * { color: " + btn_hover_text + " !important; pointer-events: none !important; }"
+
     "[data-testid='stForm'] { border-radius: 0px !important; border: 1.5px solid " + border_subtle + " !important; background-color: " + card_bg + " !important; }"
     "input, select, textarea, [data-baseweb='input'], [data-baseweb='select'] > div { border-radius: 0px !important; }"
+
     ".st-key-hero_resident button { background-color: #3949AB !important; border: none !important; height: 52px !important; border-radius: 0px !important; box-shadow: 0px 4px 12px rgba(0,0,0,0.22) !important; }"
-    ".st-key-hero_resident button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; }"
+    ".st-key-hero_resident button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; pointer-events: none !important; }"
     ".st-key-hero_student button { background-color: #F57C00 !important; border: none !important; height: 52px !important; border-radius: 0px !important; box-shadow: 0px 4px 12px rgba(0,0,0,0.22) !important; }"
-    ".st-key-hero_student button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; }"
+    ".st-key-hero_student button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; pointer-events: none !important; }"
     ".st-key-hero_market button { background-color: #2E7D32 !important; border: none !important; height: 52px !important; border-radius: 0px !important; box-shadow: 0px 4px 12px rgba(0,0,0,0.22) !important; }"
-    ".st-key-hero_market button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; }"
+    ".st-key-hero_market button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; pointer-events: none !important; }"
     "</style>"
 )
 st.markdown(css, unsafe_allow_html=True)
@@ -562,8 +568,9 @@ elif st.session_state['page'] == 'ugly_market':
 elif st.session_state['page'] == 'my_page':
     st.markdown("<h1 style='font-family: \"Jua\", sans-serif;'>📋 내 활동 (신청 · 예약 내역)</h1>", unsafe_allow_html=True)
     prof = st.session_state['student_profile']
-    display_name = prof['name'] if prof['name'] else "학생 인증 사용자"
-    st.info(f"👤 인증 사용자: **{display_name}** ({prof['school']} · 학번 {prof['student_id']})")
+    user_label = prof['name'] if prof['name'] else "인증 대학생"
+    school_label = f"{prof['school']} · 학번 {prof['student_id']}" if (prof['school'] or prof['student_id']) else "학교 인증 완료"
+    st.info(f"👤 인증 사용자: **{user_label}** ({school_label})")
 
     c_left, c_right = st.columns(2)
     with c_left:
