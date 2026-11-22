@@ -153,17 +153,13 @@ css = (
     ".blue-notice { color: " + blue_text + " !important; font-size: 14px; text-align: center; margin-top: 8px; font-weight: bold; }"
     ".ticket-box { background-color: " + card_bg + "; border: 2px solid " + primary_green + "; border-radius: 0px; padding: 20px; margin-top: 14px; border-left: 16px solid " + primary_green + "; box-shadow: 0px 4px 10px rgba(0,0,0,0.1); }"
     ".ticket-box * { color: " + text_main + " !important; }"
-
-    /* 버튼 전체 클릭 영역 확보 (자식 요소가 클릭을 가로채지 않도록 pointer-events: none 적용) */
     ".stButton, .stFormSubmitButton { position: relative; z-index: 50; }"
     "button[kind='secondary'], button[kind='primary'], .stButton > button, .stFormSubmitButton > button { background-color: " + btn_bg + " !important; color: " + btn_text + " !important; border: 1.5px solid " + border_subtle + " !important; border-radius: 0px !important; min-height: 44px !important; padding: 8px 14px !important; cursor: pointer !important; position: relative; z-index: 50; }"
     "button[kind='secondary'] *, button[kind='primary'] *, .stButton > button *, .stFormSubmitButton > button * { color: " + btn_text + " !important; pointer-events: none !important; }"
     "button[kind='secondary']:hover, button[kind='primary']:hover, .stButton > button:hover, .stFormSubmitButton > button:hover { background-color: " + btn_hover_bg + " !important; color: " + btn_hover_text + " !important; border-color: " + primary_green + " !important; }"
     "button[kind='secondary']:hover *, button[kind='primary']:hover *, .stButton > button:hover *, .stFormSubmitButton > button:hover * { color: " + btn_hover_text + " !important; pointer-events: none !important; }"
-
     "[data-testid='stForm'] { border-radius: 0px !important; border: 1.5px solid " + border_subtle + " !important; background-color: " + card_bg + " !important; }"
     "input, select, textarea, [data-baseweb='input'], [data-baseweb='select'] > div { border-radius: 0px !important; }"
-
     ".st-key-hero_resident button { background-color: #3949AB !important; border: none !important; height: 52px !important; border-radius: 0px !important; box-shadow: 0px 4px 12px rgba(0,0,0,0.22) !important; }"
     ".st-key-hero_resident button * { color: #FFFFFF !important; font-family: 'Jua', sans-serif !important; font-size: 18px !important; pointer-events: none !important; }"
     ".st-key-hero_student button { background-color: #F57C00 !important; border: none !important; height: 52px !important; border-radius: 0px !important; box-shadow: 0px 4px 12px rgba(0,0,0,0.22) !important; }"
